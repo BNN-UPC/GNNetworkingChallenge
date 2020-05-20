@@ -14,6 +14,7 @@ We strongly recommend use Python 3.7, since lower versions of Python may cause p
 The following packages are required:
 * Tensorflow == 2.1.0. You can install it following the official [Tensorflow 2 installation guide.](https://www.tensorflow.org/install)
 * NetworkX >= 2.4. You can install it using *pip* following the official [NetworkX installation guide.](https://networkx.github.io/documentation/stable/install.html)
+* Pandas >= 0.24. You can install it using *pip* following the official [Pandas installation guide.](https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html)
 
 ### Testing the installation
 In order to test the installation, we provide a toy dataset that contains some random samples. You can simply verify your installation by executing the [main.py](/code/main.py) file.
@@ -46,6 +47,7 @@ Note that all the parameters needed for the execution (max number of steps, time
 
 #### Prediction
 In order to make predictions with the trained model, the method [predict](/code/main.py#L61) is provided. This method takes as input the path to the trained model and returns an array with the predictions.
+Another method called [predict_and_save](/code/main.py#L90) can also be used in order to make the predictions. In this case, the real and the predicted delays are saved in a CSV file in order to make the visualization of the errors in an easier way. This function returns the Mean Relative Error used for the evaluation. 
 
 ## 'How to' guide to modify the code
 ### Transforming the input data
@@ -94,7 +96,18 @@ Second, you need to add the variable (i.e., f_['packets']) into the path state.
 ### Available features
 In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [“read_data.py”](/code/read_dataset.py#L175) file, where the following features are included:
 * Bandwidth: This tensor represents the bitrate (bits/time units) of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘AvgBw’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
-* …
+* Packets: This tensor represents the number of generated packets of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘PktsGen’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
+* Tos: This tensor represents the type of service of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘ToS’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
+* Link Capacity: The link capacity (kbps) of all the links found on the network (This is obtained from the topology_object[node][adj][0]['bandwidth'] values of all node-adj pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
+* Scheduling Weights: 
+* Scheduling Policies:
+* Queue Sizes:
+* Links:
+* Paths:
+* Sequences:
+* N. Links:
+* N. Paths:
+* N. Total:
 
 Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020) of the datasets to see more details about all the data included in our datasets.
 
