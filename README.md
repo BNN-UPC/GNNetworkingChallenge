@@ -9,13 +9,9 @@ This provides network operators with a functional tool able to make accurate pre
 ## Quick Start
 ### Requirements
 We strongly recommend use Python 3.7, since lower versions of Python may cause problems to define all the PATH environment variables.
-Tensorflow 2.1.0 is also required. You can install it following the official [Tensorflow 2 installation guide.](https://www.tensorflow.org/install)
-
-Once you have Tensorflow 2.1.0 installed, you can prepare your environment executing the following command:
-```
-pip install -r requirements.txt
-```
-This command installs all the dependencies needed to execute RouteNet.
+The following packages are required:
+* Tensorflow == 2.1.0. You can install it following the official [Tensorflow 2 installation guide.](https://www.tensorflow.org/install)
+* NetworkX >= 2.4. You can install it using *pip* following the official [NetworkX installation guide.](https://networkx.github.io/documentation/stable/install.html)
 
 ### Testing the installation
 In order to test the installation, we provide a toy dataset that contains some random samples. You can simply verify your installation by executing the [main.py](/code/main.py) file.
