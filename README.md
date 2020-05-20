@@ -96,7 +96,7 @@ In the previous example we could directly include the packets transmitted (i.e.,
 * Bandwidth: This tensor represents the bitrate (bits/time units) of all the src-dst paths (This is extracted from the traffic_matrix[src,dst][′Flows′][′0′][‘AvgBw’] values of our API)
 * …
 
-Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py] (/code/read_dataset.py) file. Please, refer to the [API documentation]() of the datasets to see more details about all the data included in our datasets.
+Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation]() of the datasets to see more details about all the data included in our datasets.
 
 ### Hyperparameter tunning
 If you also want to modify or even add new hyperparameters, you can do so by modifying the [[HYPERPARAMETERS]](code/config.ini#L9) section in the [config.ini](code/config.ini) file.
