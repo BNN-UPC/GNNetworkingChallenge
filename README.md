@@ -4,7 +4,9 @@ is a novel Graph Neural Network (GNN) model that was proposed as a cost-effectiv
 Thanks to its GNN architecture that operates over graph-structured data, RouteNet revealed an unprecedented ability to learn and model the complex relationships among topology, routing and input traffic in networks. As a result, it was able to make performance predictions with similar accuracy than resource-hungry packet-level simulators even in network scenarios unseen during training.
 This provides network operators with a functional tool able to make accurate predictions of end-to-end Key Performance Indicators (e.g., delay, jitter, loss).
 
-![Alt text](assets/routenet_scheme.PNG "Black-box RouteNet scheme")
+<p align="center"> 
+  <img src="/assets/routenet_scheme.PNG" width="600" alt>
+</p>
 
 ## Quick Start
 ### Requirements
