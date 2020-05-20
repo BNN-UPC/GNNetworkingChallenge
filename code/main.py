@@ -166,7 +166,7 @@ def predict_and_save(test_dir, model_dir, save_dir, filename, config):
 
     df["Predicted_Delay"] = predicions
     df['Absolute_Error'] = np.abs(df["Delay"] - df["Predicted_Delay"])
-    df['Relative_Error'] = df['Absolute_Error'] / df["Delay"]
+    df['Relative_Error'] = df['Absolute_Error'] / np.abs(df["Delay"])
 
     return df['Relative_Error'].mean()
 
