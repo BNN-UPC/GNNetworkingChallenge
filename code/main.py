@@ -16,6 +16,10 @@
 
 import tensorflow as tf
 import configparser
+import pandas as pd
+import numpy as np
+import tempfile
+import os
 from read_dataset import input_fn
 from routenet_model import model_fn
 
@@ -58,7 +62,8 @@ def train_and_evaluate(train_dir, eval_dir, config, model_dir=None):
 
     tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
 
-def predict(test_dir, model_dir):
+
+def predict(test_dir, model_dir, config):
     """Generate the predictions given a model.
 
     Args:
@@ -71,12 +76,93 @@ def predict(test_dir, model_dir):
 
     estimator = tf.estimator.Estimator(
         model_fn=model_fn,
-        model_dir=model_dir
+        model_dir=model_dir,
+        params=config
     )
 
     pred_results = estimator.predict(input_fn=lambda: input_fn(test_dir, repeat=False, shuffle=False))
 
     return [pred['predictions'] for pred in pred_results]
+
+
+def predict_and_save(test_dir, model_dir, save_dir, filename, config):
+    """Generate the predictions given a model.
+
+    Args:
+        test_dir (string): Path of the test directory.
+        model_dir (string): Directory with the trained model.
+
+    Returns:
+        list: A list with the predicted values.
+    """
+
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    tmp_dir = tempfile.mkdtemp()
+
+    ds = input_fn(test_dir, repeat=False, shuffle=False)
+
+    dataframes_to_concat = []
+
+    it = 0
+
+    df_files = []
+    delays = np.array([])
+    for predictors, target in ds:
+
+        delays = np.append(delays, target)
+
+        if it % 1000 == 0:
+
+            aux_df = pd.DataFrame({
+                "Delay": delays
+            })
+
+            dataframes_to_concat.append(aux_df)
+            delays = np.array([])
+
+            if it % 3000 == 0:
+                df = pd.concat(dataframes_to_concat)
+                file = os.path.join(tmp_dir, "tmp_df_" + str(it) + ".parquet")
+                df.to_parquet(file)
+                df_files.append(file)
+                dataframes_to_concat = []
+
+        it += 1
+
+    if it % 3000 != 0:
+        if it % 1000 != 0:
+
+            aux_df = pd.DataFrame({
+                "Delay": delays
+            })
+
+            dataframes_to_concat.append(aux_df)
+
+        df = pd.concat(dataframes_to_concat)
+        file = os.path.join(tmp_dir, "tmp_df_" + str(it) + ".parquet")
+        df.to_parquet(file)
+        df_files.append(file)
+
+    df_list = []
+
+    for file in df_files:
+        df_list.append(pd.read_parquet(os.path.join(file)))
+
+    df = pd.concat(df_list)
+
+    file = os.path.join(save_dir, filename)
+    df.to_csv(file)
+
+    predicions = predict(test_dir, model_dir, config)
+
+    df["Predicted_Delay"] = predicions
+    df['Absolute_Error'] = np.abs(df["Delay"] - df["Predicted_Delay"])
+    df['Relative_Error'] = df['Absolute_Error'] / df["Delay"]
+
+    return df['Relative_Error'].mean()
+
 
 if __name__ == '__main__':
     config = configparser.ConfigParser()
@@ -87,3 +173,9 @@ if __name__ == '__main__':
                        config['DIRECTORIES']['test'],
                        config._sections,
                        model_dir=config['DIRECTORIES']['logs'])
+
+    mre = predict_and_save(config['DIRECTORIES']['test'],
+                           config['DIRECTORIES']['logs'],
+                           '../dataframes/',
+                           'predictions.csv',
+                          config._sections)

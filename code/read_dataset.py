@@ -21,7 +21,7 @@ from data_API import DatanetAPI
 
 POLICIES = np.array(['WFQ', 'SP', 'DRR'])
 
-def generator(data_dir, shuffle=True):
+def generator(data_dir, shuffle = True):
     """This function uses the provided API to read the data and returns
        and returns the different selected features.
 
