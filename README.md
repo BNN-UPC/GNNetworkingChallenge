@@ -103,15 +103,15 @@ If you also want to modify or even add new hyperparameters, you can do so by mod
 
 ## Credits
 This project would not have been possible without the contribution of:
-* [Krzysztof Rusek](https://github.com/krzysztofrusek) - AGH University of Science and Technology
-* [Miquel Ferriol Galmés](https://github.com/MiquelFerriol) - Universitat Politècnica de Catalunya
-* [Albert López](https://github.com/albert-lopez) - Universitat Politècnica de Catalunya
-* [Paul Almasan](https://github.com/paulalmasan) - Universitat Politècnica de Catalunya
-* [Jose Suárez-Varela](https://github.com/jsuarezv) - Universitat Politècnica de Catalunya
-* Adrián Manco Sánchez - Universitat Politècnica de Catalunya
-* Víctor Sendino Garcia - Universitat Politècnica de Catalunya
-* [Pere Barlet Ros](https://github.com/pbarlet) - Universitat Politècnica de Catalunya
-* Albert Cabellos Aparicio - Universitat Politècnica de Catalunya
+* [Krzysztof Rusek](https://github.com/krzysztofrusek) - Barcelona Neural Networking center, AGH University of Science and Technology
+* [Miquel Ferriol Galmés](https://github.com/MiquelFerriol) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* [Albert López](https://github.com/albert-lopez) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* [Paul Almasan](https://github.com/paulalmasan) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* [Jose Suárez-Varela](https://github.com/jsuarezv) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Adrián Manco Sánchez - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Víctor Sendino Garcia - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* [Pere Barlet Ros](https://github.com/pbarlet) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Albert Cabellos Aparicio - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 
 ## Mailing List
 If you have any doubts, or want to discuss anything related to this repository, you can send an email to the mailing list (kdn-users@knowledgedefinednetworking.org). Please, note that you need to subscribe to the mailing list before sending an email ([link](https://mail.knowledgedefinednetworking.org/cgi-bin/mailman/listinfo/kdn-users)).
