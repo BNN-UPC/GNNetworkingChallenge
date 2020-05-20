@@ -91,6 +91,13 @@ path_state = tf.concat([
 Note that two changes are needed here. First, you need to change the *shape* variable. This is a tensor used to pad the initial states with zeros. The *CONFIG['HYPERPARAMETERS']['path_state_dim']* variable defines the size of the path state. Since we are adding a new array of one dimension (i.e., f_['packets']), we need to subtract one to the size of the *shape* variable (i.e., self.config['HYPERPARAMETERS']['path_state_dim']) **- 2**).
 Second, you need to add the variable (i.e., f_['packets']) into the path state.
 
+### Available features
+In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [“read_data.py”](/code/read_dataset.py#L175) file, where the following features are included:
+(list of features and description)
+·        Bandwidth: This tensor represents the bitrate (bits/time units) of all the src-dst paths (This is extracted from the traffic_matrix[src,dst][′Flows′][′0′][‘AvgBw’] values of our API)
+·        …
+Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py] (/code/read_dataset.py) file. Please, refer to the [API documentation]() of the datasets to see more details about all the data included in our datasets.
+
 ### Hyperparameter tunning
 If you also want to modify or even add new hyperparameters, you can do so by modifying the [[HYPERPARAMETERS]](code/config.ini#L9) section in the [config.ini](code/config.ini) file.
 
