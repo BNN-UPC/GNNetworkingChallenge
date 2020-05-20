@@ -93,7 +93,7 @@ Second, you need to add the variable (i.e., f_['packets']) into the path state.
 
 ### Available features
 In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [“read_data.py”](/code/read_dataset.py#L175) file, where the following features are included:
-* Bandwidth: This tensor represents the bitrate (bits/time units) of all the src-dst paths (This is extracted from the traffic_matrix[src,dst][′Flows′][′0′][‘AvgBw’] values of our API)
+* Bandwidth: This tensor represents the bitrate (bits/time units) of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘AvgBw’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
 * …
 
 Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020) of the datasets to see more details about all the data included in our datasets.
