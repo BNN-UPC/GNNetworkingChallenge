@@ -69,6 +69,8 @@ def predict(test_dir, model_dir, config):
     Args:
         test_dir (string): Path of the test directory.
         model_dir (string): Directory with the trained model.
+        config (configparser): Config file containing the diferent configurations
+                               and hyperparameters.
 
     Returns:
         list: A list with the predicted values.
@@ -86,14 +88,19 @@ def predict(test_dir, model_dir, config):
 
 
 def predict_and_save(test_dir, model_dir, save_dir, filename, config):
-    """Generate the predictions given a model.
+    """Generates and saves a Pandas Dataframe in CSV format with the real and the predicted delay.
+    It also computes the MRE (Mean Relative Error) of all the samples in the dataset and computes its mean.
 
     Args:
         test_dir (string): Path of the test directory.
         model_dir (string): Directory with the trained model.
+        save_dir (string): Directory where the generated dataframe will be saved (in csv).
+        filename (string): The filename of the dataframe.
+        config (configparser): Config file containing the diferent configurations
+                               and hyperparameters.
 
     Returns:
-        list: A list with the predicted values.
+        float: The Mean Relative Error.
     """
 
     if not os.path.exists(save_dir):
