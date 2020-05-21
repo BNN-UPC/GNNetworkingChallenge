@@ -33,11 +33,7 @@ def generator(data_dir, shuffle = True):
         tuple: The first element contains a dictionary with the following keys:
             - bandwith
             - packets
-            - tos
             - link_capacity
-            - scheduling_weights
-            - scheduling_policies
-            - queue_sizes
             - links
             - paths
             - sequences
@@ -63,27 +59,15 @@ def generator(data_dir, shuffle = True):
         g = sample.get_topology_object()
 
         cap_mat = np.full((g.number_of_nodes(), g.number_of_nodes()), fill_value=None)
-        weights_mat = np.full((g.number_of_nodes(), g.number_of_nodes()), dtype=object, fill_value=None)
-        queue_sizes_mat = np.full((g.number_of_nodes(), g.number_of_nodes()), dtype=object, fill_value=None)
-        policy_mat = np.full((g.number_of_nodes(), g.number_of_nodes()), dtype=object, fill_value=None)
 
         for node in range(g.number_of_nodes()):
             for adj in g[node]:
                 cap = g[node][adj][0]['bandwidth']
                 cap_mat[node, adj] = float(cap.replace("kbps", ""))
-                if 'schedulingWeights' in g.nodes[node]:
-                    weights_mat[node, adj] = g.nodes[node]['schedulingWeights'].split(',')
-                else:
-                    weights_mat[node, adj] = [0, 0, 0]
-                queue_sizes_mat[node, adj] = g.nodes[node]['queueSizes'].split(',')
-                policy_mat[node, adj] = g.nodes[node]['schedulingPolicy']
 
         links = np.where(np.ravel(cap_mat) != None)[0].tolist()
 
         link_capacities = (np.ravel(cap_mat)[links]).tolist()
-        scheduling_weights = (np.ravel(weights_mat)[links]).tolist()
-        scheduling_policies = [np.where(pol == POLICIES)[0][0] for pol in np.ravel(policy_mat)[links]]
-        queue_sizes = (np.ravel(queue_sizes_mat)[links]).tolist()
 
         ids = list(range(len(links)))
         links_id = dict(zip(links, ids))
@@ -120,14 +104,12 @@ def generator(data_dir, shuffle = True):
 
         avg_bw = []
         pkts_gen = []
-        tos = []
         delay = []
         for i in range(result.shape[0]):
             for j in range(result.shape[1]):
                 flow = traffic[i, j]['Flows'][0]
                 avg_bw.append(flow['AvgBw'])
                 pkts_gen.append(flow['PktsGen'])
-                tos.append(int(flow['ToS']))
                 d = result[i, j]['AggInfo']['AvgDelay']
                 delay.append(d)
 
@@ -136,10 +118,8 @@ def generator(data_dir, shuffle = True):
         n_total = len(path_indices)
 
         yield {"bandwith": avg_bw, "packets": pkts_gen,
-               "tos": tos, "link_capacity": link_capacities,
-               "scheduling_weights": scheduling_weights,
-               "scheduling_policies": scheduling_policies,
-               "queue_sizes": queue_sizes, "links": link_indices,
+               "link_capacity": link_capacities,
+               "links": link_indices,
                "paths": path_indices, "sequences": sequ_indices,
                "n_links": n_links, "n_paths": n_paths,
                "n_total": n_total}, delay
@@ -174,21 +154,18 @@ def input_fn(data_dir, transform=True, repeat=True, shuffle=True):
         """
     ds = tf.data.Dataset.from_generator(lambda: generator(data_dir=data_dir, shuffle=shuffle),
                                         ({"bandwith": tf.float32, "packets": tf.float32,
-                                          "tos": tf.int64, "link_capacity": tf.float32,
-                                          "scheduling_weights": tf.float32,
-                                          "scheduling_policies": tf.int64,
-                                          "queue_sizes": tf.int64,
-                                          "links": tf.int64, "paths": tf.int64, "sequences": tf.int64,
-                                          "n_links": tf.int64, "n_paths": tf.int64, "n_total": tf.int64},
-                                         tf.float32),
+                                          "link_capacity": tf.float32, "links": tf.int64,
+                                          "paths": tf.int64, "sequences": tf.int64,
+                                          "n_links": tf.int64, "n_paths": tf.int64,
+                                          "n_total": tf.int64},
+                                        tf.float32),
                                         ({"bandwith": tf.TensorShape([None]), "packets": tf.TensorShape([None]),
-                                          "tos": tf.TensorShape([None]), "link_capacity": tf.TensorShape([None]),
-                                          "scheduling_weights": tf.TensorShape([None, None]),
-                                          "scheduling_policies": tf.TensorShape([None]),
-                                          "queue_sizes": tf.TensorShape([None, None]),
-                                          "links": tf.TensorShape([None]), "paths": tf.TensorShape([None]),
+                                          "link_capacity": tf.TensorShape([None]),
+                                          "links": tf.TensorShape([None]),
+                                          "paths": tf.TensorShape([None]),
                                           "sequences": tf.TensorShape([None]),
-                                          "n_links": tf.TensorShape([]), "n_paths": tf.TensorShape([]),
+                                          "n_links": tf.TensorShape([]),
+                                          "n_paths": tf.TensorShape([]),
                                           "n_total": tf.TensorShape([])},
                                          tf.TensorShape([None])))
     if transform:

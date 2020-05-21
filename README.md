@@ -97,16 +97,12 @@ Second, you need to add the variable (i.e., f_['packets']) into the path state.
 In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [“read_data.py”](/code/read_dataset.py#L175) file, where the following features are included:
 * Bandwidth: This tensor represents the bitrate (bits/time units) of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘AvgBw’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
 * Packets: This tensor represents the number of generated packets of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘PktsGen’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
-* Tos: This tensor represents the type of service of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘ToS’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
-* Link Capacity: The link capacity (kbps) of all the links found on the network (This is obtained from the topology_object[node][adj][0]['bandwidth'] values of all node-adj pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
-* Scheduling Weights: 
-* Scheduling Policies:
-* Queue Sizes:
-* Links:
-* Paths:
-* Sequences:
-* N. Links:
-* N. Paths:
+* Link Capacity: This tensor the link capacity (kbps) of all the links found on the network (This is obtained from the topology_object[node][adj][0]['bandwidth'] values of all node-adj pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
+* Links: 
+* Paths: 
+* Sequences: 
+* N. Links: 
+* N. Paths: 
 * N. Total:
 
 Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020) of the datasets to see more details about all the data included in our datasets.
@@ -116,8 +112,8 @@ If you also want to modify or even add new hyperparameters, you can do so by mod
 
 ## Credits
 This project would not have been possible without the contribution of:
-* [Krzysztof Rusek](https://github.com/krzysztofrusek) - Barcelona Neural Networking center, AGH University of Science and Technology
 * [Miquel Ferriol Galmés](https://github.com/MiquelFerriol) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* [Krzysztof Rusek](https://github.com/krzysztofrusek) - Barcelona Neural Networking center, AGH University of Science and Technology
 * [Albert López](https://github.com/albert-lopez) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * [Paul Almasan](https://github.com/paulalmasan) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * [Jose Suárez-Varela](https://github.com/jsuarezv) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya

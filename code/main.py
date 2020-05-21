@@ -1,5 +1,5 @@
 """
-   Copyright 2020 Universitat Politècnica de Catalunya & AGH University of Science and Technology
+   Copyright 2020 Universitat Politècnica de Catalunya
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
