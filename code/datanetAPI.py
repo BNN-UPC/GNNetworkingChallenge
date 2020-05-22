@@ -451,7 +451,7 @@ class DatanetAPI:
     information gathered.
     """
     
-    def __init__ (self, data_folder, intensity_values = [], shuffle=True):
+    def __init__ (self, data_folder, intensity_values = [], shuffle=False):
         """
         Initialization of the PasringTool instance
 
@@ -467,7 +467,7 @@ class DatanetAPI:
             User-defined intensity values used to constrain the reading process
             to these/this value/range of values.
         shuffle: boolean
-            Specify if all files should be shuffled. By default true
+            Specify if all files should be shuffled. By default false
         Returns
         -------
         None.
@@ -683,7 +683,7 @@ class DatanetAPI:
             if ("graphs" not in dirs or "routings" not in dirs):
                 continue
             # Generate graphs dictionaries
-            graphs_dic[root] = self._generate_graphs_dic(root+"/graphs")
+            graphs_dic[root] = self._generate_graphs_dic(os.path.join(root,"graphs"))
             if (len(graphs_dic[root].keys()) == 0):
                 print ("Error: No graphs found in directory "+root)
                 exit()
@@ -745,7 +745,7 @@ class DatanetAPI:
                         if (s._routing_file in routings_dic[root]):
                             routing_matrix = routings_dic[root][s._routing_file]
                         else:
-                            routing_matrix = self._create_routing_matrix(g,root+"/routings/"+s._routing_file)
+                            routing_matrix = self._create_routing_matrix(g,os.path.join(root,"routings",s._routing_file))
                             routings_dic[root][s._routing_file] = routing_matrix
                         
                         self._process_flow_results_traffic_line(s._results_line, s._traffic_line, s._flowresults_line, s._status_line, s)
@@ -764,7 +764,6 @@ class DatanetAPI:
             else:
                 continue
             ctr += 1
-            #print("Progress check: %d/%d" % (ctr,len(tuple_files)))
     
     def _process_flow_results_traffic_line(self, rline, tline, fline, sline, s):
         """
