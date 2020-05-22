@@ -163,9 +163,9 @@ def predict_and_save(test_dir, model_dir, save_dir, filename, config):
     file = os.path.join(save_dir, filename)
     df.to_csv(file)
 
-    predicions = predict(test_dir, model_dir, config)
+    predictions = predict(test_dir, model_dir, config)
 
-    df["Predicted_Delay"] = predicions
+    df["Predicted_Delay"] = predictions
     df['Absolute_Error'] = np.abs(df["Delay"] - df["Predicted_Delay"])
     df['Absolute_Percentage_Error'] = (df['Absolute_Error'] / np.abs(df["Delay"]))*100
 
