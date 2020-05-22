@@ -89,7 +89,8 @@ def predict(test_dir, model_dir, config):
 
 def predict_and_save(test_dir, model_dir, save_dir, filename, config):
     """Generates and saves a Pandas Dataframe in CSV format with the real and the predicted delay.
-    It also computes the MRE (Mean Relative Error) of all the samples in the dataset and computes its mean.
+    It also computes the MAPE (Mean Absolute Percentage Error) of all the samples in the dataset
+    and computes its mean.
 
     Args:
         test_dir (string): Path of the test directory.
@@ -100,7 +101,7 @@ def predict_and_save(test_dir, model_dir, save_dir, filename, config):
                                and hyperparameters.
 
     Returns:
-        float: The Mean Relative Error.
+        float: The Mean Absolute Percentage Error.
     """
 
     if not os.path.exists(save_dir):
@@ -166,9 +167,9 @@ def predict_and_save(test_dir, model_dir, save_dir, filename, config):
 
     df["Predicted_Delay"] = predicions
     df['Absolute_Error'] = np.abs(df["Delay"] - df["Predicted_Delay"])
-    df['Relative_Error'] = df['Absolute_Error'] / np.abs(df["Delay"])
+    df['Absolute_Percentage_Error'] = (df['Absolute_Error'] / np.abs(df["Delay"]))*100
 
-    return df['Relative_Error'].mean()
+    return df['Absolute_Percentage_Error'].mean()
 
 
 if __name__ == '__main__':
