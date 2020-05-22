@@ -106,6 +106,8 @@ In the previous example we could directly include the packets transmitted (i.e.,
 
 Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020) of the datasets to see more details about all the data included in our datasets.
 
+**Note:** For the challenge, consider that variables under the *performance_matrix* of sample objects (see [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)) cannot be used as inputs of the model, since they will not be available in the final test set.
+
 Also, note that this RouteNet implementation assumes there is only a flow per path. However, it could be easily extensible to suport multiple flows on every src-dst pair.
 
 ### Hyperparameter tunning
