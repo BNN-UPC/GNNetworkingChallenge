@@ -38,7 +38,7 @@ INFO:tensorflow:Loss = 0.25079936, Regularization loss = 1.8887523, Total loss =
 We provide two methods, one for training and evaluation and one for prediction. These methods can be found in the [main.py](/code/main.py) file.
 
 #### Training and evaluation
-The method for training and evaluation can be found in the [main.py](/code/main.py) file and it is called [train_and_evaluate](/code/main.py#L25). This method trains during a max number of steps and evaluates every number of seconds. 
+The method for training and evaluation can be found in the [main.py](/code/main.py) file and it is called [train_and_evaluate](/code/main.py#L29). This method trains during a max number of steps and evaluates every number of seconds. 
 It also automatically saves the trained model in a directory every time step.
 
 <ins>**IMPORTANT NOTE:**</ins> The execution can be stopped and resumed at any time. However, **if you want to start a new training phase you need to create a new directory (or empty the previous one)**. If you are only doing tests, you can simply pass *model_dir*=None. This will create a temporary directory that will be removed at the end of the execution.
@@ -46,13 +46,13 @@ It also automatically saves the trained model in a directory every time step.
 Note that all the parameters needed for the execution (max number of steps, time between model saving...) can be changed in the [[RUN_CONFIG]](code/config.ini#L29) section within the [config.ini](code/config.ini) file.
 
 #### Prediction
-In order to make predictions with the trained model, the method [predict](/code/main.py#L61) is provided. This method takes as input the path to the trained model and returns an array with the predictions.
+In order to make predictions with the trained model, the method [predict](/code/main.py#L66) is provided. This method takes as input the path to the trained model and returns an array with the predictions.
 Another method called [predict_and_save](/code/main.py#L90) can also be used in order to make the predictions. In this case, the real and the predicted delays are saved in a CSV file in order to make the visualization of the errors in an easier way. This function returns the Mean Relative Error used for the evaluation. 
 
 ## 'How to' guide to modify the code
 ### Transforming the input data
 Now, the model reads the data as it is in the datasets. However, it is often highly recommended to apply some transformations (e.g. normalization, standardization, etc.) to the data in order to facilitate the model to converge during training.
-In the [dataset.py](code/read_dataset.py) module you can find a function called [transformation(x, y)](code/read_dataset.py#L148), where the X variable represents the predictors used by the model and the Y variable the target values.
+In the [dataset.py](code/read_dataset.py) module you can find a function called [transformation(x, y)](code/read_dataset.py#L125), where the X variable represents the predictors used by the model and the Y variable the target values.
 For example, if you want to apply a Min-Max scaling over the 'bandwith' variable, you can use the following code:
 ```
 def transformation(x, y):
@@ -63,7 +63,7 @@ Where 'bandwith_min' and 'bandwith_max' are respectively the minimum and maximum
 
 ### Adding new features to the hidden states
 Currently, the model only considers the 'bandwith' variable to initialize the initial state of paths.
-If we take a look into the [model.py](code/routenet_model.py) module, we can see how the [state initialization](code/routenet_model.py#L96) is done:
+If we take a look into the [model.py](code/routenet_model.py) module, we can see how the [state initialization](code/routenet_model.py#L91) is done:
 ```
 # Compute the shape for the all-zero tensor for path_state
 shape = tf.stack([
@@ -94,7 +94,7 @@ Note that two changes are needed here. First, you need to change the *shape* var
 Second, you need to add the variable (i.e., f_['packets']) into the path state.
 
 ### Available features
-In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [“read_data.py”](/code/read_dataset.py#L175) file, where the following features are included:
+In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [read_data.py](/code/read_dataset.py#L175) file, where the following features are included:
 * 'bandwidth': This tensor represents the bitrate (bits/time unit) of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘AvgBw’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
 * 'packets': This tensor represents the rate of packets generated (packets/time unit) of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][′0′][‘PktsGen’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
 * 'link_capacity': This tensor represents the link capacity (bits/time unit) of all the links found on the network (This is obtained from the topology_object[node][adj][0]['bandwidth'] values of all node-adj pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
@@ -104,7 +104,7 @@ In the previous example we could directly include the packets transmitted (i.e.,
 * 'n_links': This variable represents the number of links in the topology. 
 * 'n_paths': This variable represents the total number of src-dst paths in the network.
 
-Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L161) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020) of the datasets to see more details about all the data included in our datasets.
+Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L138) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020) of the datasets to see more details about all the data included in our datasets.
 
 **Note:** For the challenge, consider that variables under the *performance_matrix* of sample objects (see [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)) cannot be used as inputs of the model, since they will not be available in the final test set.
 

@@ -1,6 +1,8 @@
 """
    Copyright 2020 Universitat Politècnica de Catalunya & AGH University of Science and Technology
 
+                                        BSD 3-Clause License
+
    Redistribution and use in source and binary forms, with or without modification, are permitted
    provided that the following conditions are met:
     1. Redistributions of source code must retain the above copyright notice, this list of conditions

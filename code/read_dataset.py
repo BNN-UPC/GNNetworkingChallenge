@@ -37,7 +37,7 @@ def generator(data_dir, shuffle = False):
             - links
             - paths
             - sequences
-            - n_links, n_paths, n_total
+            - n_links, n_paths
             The second element contains the source-destination delay
     """
     tool = DatanetAPI(data_dir, [], shuffle)
