@@ -17,11 +17,11 @@
 import numpy as np
 import tensorflow as tf
 
-from data_API import DatanetAPI
+from datanetAPI import DatanetAPI
 
 POLICIES = np.array(['WFQ', 'SP', 'DRR'])
 
-def generator(data_dir, shuffle = True):
+def generator(data_dir, shuffle = False):
     """This function uses the provided API to read the data and returns
        and returns the different selected features.
 
@@ -62,8 +62,7 @@ def generator(data_dir, shuffle = True):
 
         for node in range(g.number_of_nodes()):
             for adj in g[node]:
-                cap = g[node][adj][0]['bandwidth']
-                cap_mat[node, adj] = float(cap.replace("kbps", ""))
+                cap_mat[node, adj] = g[node][adj][0]['bandwidth']
 
         links = np.where(np.ravel(cap_mat) != None)[0].tolist()
 
@@ -115,14 +114,12 @@ def generator(data_dir, shuffle = True):
 
         n_paths = len(path_ids)
         n_links = max(max(path_ids)) + 1
-        n_total = len(path_indices)
 
         yield {"bandwith": avg_bw, "packets": pkts_gen,
                "link_capacity": link_capacities,
                "links": link_indices,
                "paths": path_indices, "sequences": sequ_indices,
-               "n_links": n_links, "n_paths": n_paths,
-               "n_total": n_total}, delay
+               "n_links": n_links, "n_paths": n_paths}, delay
 
 
 def transformation(x, y):
@@ -138,7 +135,7 @@ def transformation(x, y):
     return x, y
 
 
-def input_fn(data_dir, transform=True, repeat=True, shuffle=True):
+def input_fn(data_dir, transform=True, repeat=True, shuffle=False):
     """This function uses the generator function in order to create a Tensorflow dataset
 
         Args:
@@ -156,8 +153,7 @@ def input_fn(data_dir, transform=True, repeat=True, shuffle=True):
                                         ({"bandwith": tf.float32, "packets": tf.float32,
                                           "link_capacity": tf.float32, "links": tf.int64,
                                           "paths": tf.int64, "sequences": tf.int64,
-                                          "n_links": tf.int64, "n_paths": tf.int64,
-                                          "n_total": tf.int64},
+                                          "n_links": tf.int64, "n_paths": tf.int64},
                                         tf.float32),
                                         ({"bandwith": tf.TensorShape([None]), "packets": tf.TensorShape([None]),
                                           "link_capacity": tf.TensorShape([None]),
@@ -165,8 +161,7 @@ def input_fn(data_dir, transform=True, repeat=True, shuffle=True):
                                           "paths": tf.TensorShape([None]),
                                           "sequences": tf.TensorShape([None]),
                                           "n_links": tf.TensorShape([]),
-                                          "n_paths": tf.TensorShape([]),
-                                          "n_total": tf.TensorShape([])},
+                                          "n_paths": tf.TensorShape([])},
                                          tf.TensorShape([None])))
     if transform:
         ds = ds.map(lambda x, y: transformation(x, y))

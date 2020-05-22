@@ -51,7 +51,7 @@ def train_and_evaluate(train_dir, eval_dir, config, model_dir=None):
     )
 
     train_spec = tf.estimator.TrainSpec(
-        input_fn=lambda: input_fn(train_dir),
+        input_fn=lambda: input_fn(train_dir, repeat=True, shuffle=True),
         max_steps=int(config['RUN_CONFIG']['train_steps'])
     )
 

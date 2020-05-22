@@ -194,7 +194,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 0
@@ -202,7 +202,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 1
@@ -210,7 +210,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 1
@@ -218,7 +218,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 1
@@ -226,7 +226,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 1
@@ -234,7 +234,7 @@ graph [
     key 0
     port 3
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 2
@@ -242,7 +242,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 2
@@ -250,7 +250,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 2
@@ -258,7 +258,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 3
@@ -266,7 +266,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 3
@@ -274,7 +274,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 3
@@ -282,7 +282,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 3
@@ -290,7 +290,7 @@ graph [
     key 0
     port 3
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 4
@@ -298,7 +298,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 4
@@ -306,7 +306,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 5
@@ -314,7 +314,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 5
@@ -322,7 +322,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 6
@@ -330,7 +330,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 6
@@ -338,7 +338,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 6
@@ -346,7 +346,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 6
@@ -354,7 +354,7 @@ graph [
     key 0
     port 3
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 7
@@ -362,7 +362,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 7
@@ -370,7 +370,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 7
@@ -378,7 +378,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 8
@@ -386,7 +386,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 8
@@ -394,7 +394,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 8
@@ -402,7 +402,7 @@ graph [
     key 0
     port 4
     weight 1
-    bandwidth "100kbps"
+    bandwidth "100000"
   ]
   edge [
     source 8
@@ -410,7 +410,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 8
@@ -418,7 +418,7 @@ graph [
     key 0
     port 3
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 8
@@ -426,7 +426,7 @@ graph [
     key 0
     port 5
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 8
@@ -434,7 +434,7 @@ graph [
     key 0
     port 6
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 8
@@ -442,7 +442,7 @@ graph [
     key 0
     port 7
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 9
@@ -450,7 +450,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 9
@@ -458,7 +458,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 9
@@ -466,7 +466,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 9
@@ -474,7 +474,7 @@ graph [
     key 0
     port 3
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 9
@@ -482,7 +482,7 @@ graph [
     key 0
     port 4
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 10
@@ -490,7 +490,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 10
@@ -498,7 +498,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 11
@@ -506,7 +506,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 11
@@ -514,7 +514,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 11
@@ -522,7 +522,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 11
@@ -530,7 +530,7 @@ graph [
     key 0
     port 3
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 12
@@ -538,7 +538,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "100kbps"
+    bandwidth "100000"
   ]
   edge [
     source 12
@@ -546,7 +546,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 12
@@ -554,7 +554,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 12
@@ -562,7 +562,7 @@ graph [
     key 0
     port 3
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 12
@@ -570,7 +570,7 @@ graph [
     key 0
     port 4
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 13
@@ -578,7 +578,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 13
@@ -586,7 +586,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 13
@@ -594,7 +594,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 14
@@ -602,7 +602,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 14
@@ -610,7 +610,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 15
@@ -618,7 +618,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 15
@@ -626,7 +626,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 16
@@ -634,7 +634,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 16
@@ -642,7 +642,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 17
@@ -650,7 +650,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 17
@@ -658,7 +658,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 17
@@ -666,7 +666,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 18
@@ -674,7 +674,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 18
@@ -682,7 +682,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 18
@@ -690,7 +690,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 19
@@ -698,7 +698,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 19
@@ -706,7 +706,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 20
@@ -714,7 +714,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "25kbps"
+    bandwidth "25000"
   ]
   edge [
     source 20
@@ -722,7 +722,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 21
@@ -730,7 +730,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 21
@@ -738,7 +738,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 21
@@ -746,7 +746,7 @@ graph [
     key 0
     port 2
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 22
@@ -754,7 +754,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 22
@@ -762,7 +762,7 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
   edge [
     source 23
@@ -770,7 +770,7 @@ graph [
     key 0
     port 0
     weight 1
-    bandwidth "40kbps"
+    bandwidth "40000"
   ]
   edge [
     source 23
@@ -778,6 +778,6 @@ graph [
     key 0
     port 1
     weight 1
-    bandwidth "10kbps"
+    bandwidth "10000"
   ]
 ]
