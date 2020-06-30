@@ -1,4 +1,9 @@
-# Routenet Challenge
+# RouteNet - Graph Neural Networking challenge 2020
+
+#### Organized as part of "ITU AI/ML in 5G challenge"
+
+Challenge website: https://bnn.upc.edu/challenge2020
+
 [RouteNet](https://arxiv.org/abs/1901.08113)
 is a novel Graph Neural Network (GNN) model that was proposed as a cost-effective alternative to estimate per-source-destination performance metrics (e.g., delay, jitter, loss) in networks. 
 Thanks to its GNN architecture that operates over graph-structured data, RouteNet revealed an unprecedented ability to learn and model the complex relationships among topology, routing and input traffic in networks. As a result, it was able to make performance predictions with similar accuracy than resource-hungry packet-level simulators even in network scenarios unseen during training.
