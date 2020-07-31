@@ -119,6 +119,7 @@ def predict_and_save(test_dir, model_dir, save_dir, filename, config):
     delays = np.array([])
     for predictors, target in ds:
 
+        it += 1
         delays = np.append(delays, target)
 
         if it % 1000 == 0:
@@ -137,7 +138,6 @@ def predict_and_save(test_dir, model_dir, save_dir, filename, config):
                 df_files.append(file)
                 dataframes_to_concat = []
 
-        it += 1
 
     if it % 3000 != 0:
         if it % 1000 != 0:
