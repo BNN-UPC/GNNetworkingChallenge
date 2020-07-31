@@ -142,7 +142,7 @@ class Sample:
         of this sample instance.
         """
         
-        return self.global_losses
+        return self.global_delay
     
     def get_maxAvgLambda(self):
         """
@@ -150,7 +150,7 @@ class Sample:
         the overall traffic intensity of the network scenario.
         """
         
-        return self.global_losses
+        return self.maxAvgLambda
         
     def get_performance_matrix(self):
         """
