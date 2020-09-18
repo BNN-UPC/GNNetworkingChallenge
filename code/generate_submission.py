@@ -9,7 +9,7 @@ from routenet_model import model_fn
 # Input variables #
 ###################
 # Path to the test dataset root directory
-test_dataset_directory = "../data/sample_data/test_upload"
+test_dataset_directory = "../data/sample_data/test"
 # path to the configuration file (set correctly the paths to the trained model within this file - i.e., "logs" variable)
 config_file_path = '../code/config.ini'
 # The filename of the output compressed CSV file (in ZIP format)

@@ -64,6 +64,8 @@ def generator(data_dir, shuffle = False):
             for adj in g[node]:
                 cap_mat[node, adj] = g[node][adj][0]['bandwidth']
 
+        print(cap_mat)
+
         links = np.where(np.ravel(cap_mat) != None)[0].tolist()
 
         link_capacities = (np.ravel(cap_mat)[links]).tolist()
