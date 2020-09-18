@@ -689,6 +689,7 @@ class DatanetAPI:
                 exit()
             routings_dic[root] = {}
             # Extend the list of files to process
+            files.sort()
             tuple_files.extend([(root, f) for f in files if f.endswith("tar.gz")])
 
         if self.shuffle:
