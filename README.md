@@ -2,7 +2,7 @@
 
 #### Organized as part of "ITU AI/ML in 5G challenge"
 
-Challenge website: https://bnn.upc.edu/challenge2020
+#### Challenge website: https://bnn.upc.edu/challenge2020
 
 #### Contact mailing list: challenge-kdn@mail.knowledgedefinednetworking.org
 (You first need to subscribe at: https://mail.knowledgedefinednetworking.org/cgi-bin/mailman/listinfo/challenge-kdn).
