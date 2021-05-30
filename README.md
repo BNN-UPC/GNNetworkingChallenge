@@ -160,7 +160,7 @@ If you have any doubts, or want to discuss anything related to this repository, 
 ## License
 See [LICENSE](LICENSE) for full of the license text.
 ```
-Copyright Copyright 2020 Universitat Politècnica de Catalunya
+Copyright Copyright 2021 Universitat Politècnica de Catalunya
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
