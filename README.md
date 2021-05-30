@@ -42,7 +42,7 @@ The [main.py](/code/main.py) file automatically trains and evaluates your model.
 
 <ins>**IMPORTANT NOTE:**</ins> The execution can be stopped and resumed at any time. However, **if you want to start a new training phase you need to create a new directory (or empty the previous one)**. If you are only doing tests and do not want to save the model, you can simply remove the callbacks argument of the fit function.
 
-Note that all the parameters needed for the execution (max number of epochs, steps per epoch...) can be changed in the [[RUN_CONFIG]](code/config.ini#L29) section within the [config.ini](code/config.ini) file.
+Note that all the parameters needed for the execution (max number of epochs, steps per epoch...) can be changed in the [[RUN_CONFIG]](code/config.ini#L21) section within the [config.ini](code/config.ini) file.
 
 #### Prediction
 The last thing the [main.py](/code/main.py) file does is to return and store the predictions in a python array that then can be used to store them, post-process them... 
@@ -52,7 +52,7 @@ Note that, if you only want to make predictions once the model is trained, you c
 ## 'How to' guide to modify the code
 ### Transforming the input data
 Now, the model reads the data as it is in the datasets. However, it is often highly recommended to apply some transformations (e.g. normalization, standardization, etc.) to the data in order to facilitate the model to converge during training.
-In the [main.py](code/main.py) module you can find a function called [transformation(x, y)](code/main.py#L125), where the X variable represents the predictors used by the model and the Y variable the target values.
+In the [main.py](code/main.py) module you can find a function called [transformation(x, y)](code/main.py#L14), where the X variable represents the predictors used by the model and the Y variable the target values.
 For example, if you want to apply a Min-Max scaling over the 'bandwith' variable, you can use the following code:
 ```
 def transformation(x, y):
@@ -125,7 +125,7 @@ To this one:
 Finally, as the outputs required in the challenge are the per-path mean delays, it is possible to make a final post-processing to infer them from the avg. queue occupancy estimated by RouteNet. Particularly, path delays can be estimated as the linear combination of delays on each queue that form the path, considering the avg. queue occupation, the queue size, and the capacity of the outgoing link. The delay of a queue can be computed by dividing the avg. number of packets in the queue (predicted-queue-occupancy * queue size), by the capacity of the outgoing link of the queue.
 
 ### Available features
-In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [read_data.py](/code/read_dataset.py#L175) file, where the following features are included:
+In the previous example we could directly include the packets transmitted (i.e., f_['packets']) into the paths’ hidden states. This is because this implementation provides some dataset features that are already processed from the dataset and converted into tensors. Particularly, these tensors are then used to fill a [TensorFlow Dataset structure]( https://www.tensorflow.org/versions/r2.1/api_docs/python/tf/data/Dataset). This can be found in the [read_dataset.py](/code/read_dataset.py#L121) file, where the following features are included:
 * 'bandwidth': This tensor represents the bitrate (bits/time unit) of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][flow_id][‘AvgBw’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
 * 'packets': This tensor represents the rate of packets generated (packets/time unit) of all the src-dst paths (This is obtained from the traffic_matrix[src,dst][′Flows′][flow_id][‘PktsGen’] values of all src-dst pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
 * 'link_capacity': This tensor represents the link capacity (bits/time unit) of all the links found on the network (This is obtained from the topology_object[node][adj][0]['bandwidth'] values of all node-adj pairs using the [DataNet API]((https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020)))
@@ -135,7 +135,7 @@ In the previous example we could directly include the packets transmitted (i.e.,
 * 'n_links': This variable represents the number of links in the topology. 
 * 'n_paths': This variable represents the total number of src-dst paths in the network.
 
-Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L24) and [input_fn()](/code/read_dataset.py#L138) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation](https://github.com/knowledgedefinednetworking/datanetAPI/tree/challenge2020) of the datasets to see more details about all the data included in our datasets.
+Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L21) and [input_fn()](/code/read_dataset.py#L121) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation]( https://github.com/BNN-UPC/datanetAPI/tree/challenge2021) of the datasets to see more details about all the data included in our datasets.
 
 **IMPORTANT NOTE:** For the challenge, consider that variables under the structures performance_matrix and port_stats cannot be used as inputs of the model, since they will not be available in the final test set (see more info at the [API documentation]( https://github.com/BNN-UPC/datanetAPI/tree/challenge2021).
 
@@ -155,7 +155,7 @@ This project would not have been possible without the contribution of:
 * Albert Cabellos Aparicio - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 
 ## Mailing List
-If you have any doubts, or want to discuss anything related to this repository, you can send an email to the mailing list (kdn-users@knowledgedefinednetworking.org). Please, note that you need to subscribe to the mailing list before sending an email ([link](https://mail.knowledgedefinednetworking.org/cgi-bin/mailman/listinfo/kdn-users)).
+If you have any doubts, or want to discuss anything related to this repository, you can send an email to the mailing list [challenge2021@bnn.upc.edu]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)). Please, note that you need to subscribe to the mailing list before sending an email [[link]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)].
 
 ## License
 See [LICENSE](LICENSE) for full of the license text.

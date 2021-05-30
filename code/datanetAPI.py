@@ -1,6 +1,6 @@
 '''
  *
- * Copyright (C) 2020 Universitat Politècnica de Catalunya.
+ * Copyright (C) 2021 Universitat Politècnica de Catalunya.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
