@@ -1,6 +1,0 @@
-import os
-
-files = [f for f in os.listdir("./") if f.endswith("txt")]
-for f in files:
-  pref = f[7:]
-  print (pref)

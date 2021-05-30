@@ -1,0 +1,86 @@
+# * Copyright (C) 2021 Universitat Politècnica de Catalunya.
+# *
+# * Licensed under the Apache License, Version 2.0 (the "License");
+# * you may not use this file except in compliance with the License.
+# * You may obtain a copy of the License at:
+# *
+# *     http://www.apache.org/licenses/LICENSE-2.0
+# *
+# * Unless required by applicable law or agreed to in writing, software
+# * distributed under the License is distributed on an "AS IS" BASIS,
+# * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# * See the License for the specific language governing permissions and
+# * limitations under the License.
+
+# Definition of the entities
+entities:
+- name: link
+  state_dimension: 32
+  initial_state:
+    - type: build_state
+      input: [$capacity]
+
+- name: path
+  state_dimension: 32
+  initial_state:
+    - type: build_state
+      input: [$traffic]
+
+
+# Definition of the message passing phase
+message_passing:
+  num_iterations: 8
+  stages:
+    # STAGE 1:
+    - stage_message_passings:
+      # links to paths
+      - destination_entity: path
+        source_entities:
+          - name: link
+            message:
+              - type: direct_assignment
+        aggregation:
+          - type: ordered
+        update:
+          type: neural_network
+          nn_name: recurrent1
+
+    # STAGE 2:
+    - stage_message_passings:
+      # paths to links
+      - destination_entity: link
+        source_entities:
+        - name: path
+          message:
+          - type: direct_assignment
+        aggregation:
+          - type: sum
+        update:
+          type: neural_network
+          nn_name: recurrent1
+
+# Definition of the readout
+readout:
+- type: neural_network
+  input: [path]
+  nn_name: readout_model
+  output_label: [$delay]
+
+# Definition of the Neural Networks
+neural_networks:
+- nn_name: readout_model
+  nn_architecture:
+  - type_layer: Dense
+    units: 256
+    kernel_regularizer: 0.1
+    activation: selu
+  - type_layer: Dense
+    units: 256
+  - type_layer: Dense
+    units: 1
+    kernel_regularizer: 0.01
+    activation: None
+
+- nn_name: recurrent1
+  nn_architecture:
+    - type_layer: GRU
