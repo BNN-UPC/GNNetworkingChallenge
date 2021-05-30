@@ -1,4 +1,4 @@
-# RouteNet - Graph Neural Networking challenge 2020
+# RouteNet - Graph Neural Networking challenge 2021
 
 #### Organized as part of "ITU AI/ML in 5G challenge"
 
