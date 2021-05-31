@@ -137,7 +137,7 @@ In the previous example we could directly include the packets transmitted (i.e.,
 
 Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [generator()](/code/read_dataset.py#L21) and [input_fn()](/code/read_dataset.py#L121) functions in the [read_dataset.py](/code/read_dataset.py) file. Please, refer to the [API documentation]( https://github.com/BNN-UPC/datanetAPI/tree/challenge2021) of the datasets to see more details about all the data included in our datasets.
 
-**IMPORTANT NOTE:** For the challenge, consider that variables under the structures performance_matrix and port_stats cannot be used as inputs of the model, since they will not be available in the final test set (see more info at the [API documentation]( https://github.com/BNN-UPC/datanetAPI/tree/challenge2021).
+**IMPORTANT NOTE:** For the challenge, consider that variables under the structures performance_matrix and port_stats cannot be used as inputs of the model, since they will not be available in the final test set (see more info at the [API documentation](https://github.com/BNN-UPC/datanetAPI/tree/challenge2021)).
 
 ### Hyperparameter tunning
 If you also want to modify or even add new hyperparameters, you can do so by modifying the [[HYPERPARAMETERS]](code/config.ini#L9) section in the [config.ini](code/config.ini) file.
