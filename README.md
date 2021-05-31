@@ -2,10 +2,10 @@
 
 #### Organized as part of "ITU AI/ML in 5G challenge"
 
-#### Challenge website: https://bnn.upc.edu/challenge2020
+#### Challenge website: https://bnn.upc.edu/challenge/gnnet2021
 
-#### Contact mailing list: challenge-kdn@mail.knowledgedefinednetworking.org
-(Please, note that you first need to subscribe at: https://mail.knowledgedefinednetworking.org/cgi-bin/mailman/listinfo/challenge-kdn).
+Contact mailing list: [challenge2021@bnn.upc.edu]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)
+(Please, note that you first need to subscribe at: https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021).
 
 [RouteNet](https://arxiv.org/abs/1901.08113) is a Graph Neural Network (GNN) model that estimates per-source-destination performance metrics (e.g., delay, jitter, loss) in networks. Thanks to its GNN architecture that operates over graph-structured data, RouteNet revealed an unprecedented ability to learn and model the complex relationships among topology, routing and input traffic in networks. As a result, it was able to make performance predictions with similar accuracy than costly packet-level simulators even in network scenarios unseen during training. This provides network operators with a functional tool able to make accurate predictions of end-to-end Key Performance Indicators (e.g., delay, jitter, loss).
 
@@ -163,7 +163,7 @@ In the previous example we could directly include the packets transmitted ($pack
 
 Note that there are additional features in our datasets that are not included in this TensorFlow Data structure. However, they can be included processing the data with the dataset API and converting it into tensors. For this, you need to modify the [network_to_hypergraph](/code/migrate.py#L38) function in the [migrate.py](/code/migrate.py) file. Please, refer to the [API documentation]( https://github.com/BNN-UPC/datanetAPI/tree/challenge2021) of the datasets to see more details about all the data included in our datasets.
 
-**IMPORTANT NOTE:** For the challenge, consider that variables under the structures performance_matrix and port_stats cannot be used as inputs of the model, since they will not be available in the final test set (see more info at the [API documentation]( https://github.com/BNN-UPC/datanetAPI/tree/challenge2021).
+**IMPORTANT NOTE:** For the challenge, consider that variables under the structures performance_matrix and port_stats cannot be used as inputs of the model, since they will not be available in the final test set (see more info at the [API documentation](https://github.com/BNN-UPC/datanetAPI/tree/challenge2021)).
 
 ### Hyperparameter tunning
 If you also want to modify or even add new hyperparameters, you can do so by modifying the [[HYPERPARAMETERS]](code/config.ini#L9) section in the [config.ini](code/config.ini) file.
