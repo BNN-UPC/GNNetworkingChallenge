@@ -24,7 +24,7 @@ This project would not have been possible without the contribution of:
 * Albert Cabellos Aparicio - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 
 ## Mailing List
-If you have any doubts, or want to discuss anything related to this repository, you can send an email to the mailing list (kdn-users@knowledgedefinednetworking.org). Please, note that you need to subscribe to the mailing list before sending an email ([link](https://mail.knowledgedefinednetworking.org/cgi-bin/mailman/listinfo/kdn-users)).
+If you have any doubts, or want to discuss anything related to this repository, you can send an email to the mailing list [challenge2021@bnn.upc.edu]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)). Please, note that you need to subscribe to the mailing list before sending an email [[link]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)].
 
 ## License
 See [LICENSE](LICENSE) for full of the license text.
