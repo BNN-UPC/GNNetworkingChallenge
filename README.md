@@ -2,9 +2,9 @@
 
 #### Organized as part of "ITU AI/ML in 5G challenge"
 
-#### Challenge website: https://bnn.upc.edu/challenge2020
+#### Challenge website: https://bnn.upc.edu/challenge/gnnet2021
 
-#### Contact mailing list: challenge-kdn@mail.knowledgedefinednetworking.org
+Contact mailing list: [challenge2021@bnn.upc.edu]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)
 (Please, note that you first need to subscribe at: https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021).
 
 [RouteNet](https://arxiv.org/abs/1901.08113) is a Graph Neural Network (GNN) model that estimates per-source-destination performance metrics (e.g., delay, jitter, loss) in networks. Thanks to its GNN architecture that operates over graph-structured data, RouteNet revealed an unprecedented ability to learn and model the complex relationships among topology, routing and input traffic in networks. As a result, it was able to make performance predictions with similar accuracy than costly packet-level simulators even in network scenarios unseen during training. This provides network operators with a functional tool able to make accurate predictions of end-to-end Key Performance Indicators (e.g., delay, jitter, loss).
