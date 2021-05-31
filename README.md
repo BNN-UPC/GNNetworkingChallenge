@@ -17,7 +17,7 @@
 ### Requirements
 We strongly recommend use Python 3.7 or greater, since lower versions of Python may cause problems to define all the PATH environment variables.
 The following packages are required:
-* IGNNITION == 1.0.1. You can install it following the official [IGNNITION installation guide.](https://ignnition.net/doc/installation/)
+* IGNNITION == 1.0.2. You can install it following the official [IGNNITION installation guide.](https://ignnition.net/doc/installation/)
 
 IGNNITION is a TensorFlow-based framework for fast prototyping of GNNs. It provides a codeless programming interface, where users can implement their own GNN models in a YAML file, without writing a single line of TensorFlow. With this tool, network engineers are able to create their own GNN models in a matter of few hours. IGNNITION also incorporates a set of tools and functionalities that guide users during the design and implementation process of the GNN.
 ### Testing the installation
