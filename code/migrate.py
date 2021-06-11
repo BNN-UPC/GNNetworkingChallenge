@@ -53,8 +53,8 @@ def network_to_hypergraph(network_graph, routing_matrix, traffic_matrix, perform
                     D_G.add_node('l_{}_{}'.format(src, dst),
                                  entity='link',
                                  capacity=G.edges[src, dst]['bandwidth'],
-                                 occupancy=P[src][dst]['qosQueuesState'][0]['avgPortOccupancy'] /
-                                           G.nodes[src]['queueSizes'])
+                                 ccupancy=P[src][dst]['qosQueuesStats'][0]['avgPortOccupancy'] /
+                                          G.nodes[src]['queueSizes'])
 
                 for f_id in range(len(T[src, dst]['Flows'])):
                     if T[src, dst]['Flows'][f_id]['AvgBw'] != 0 and T[src, dst]['Flows'][f_id]['PktsGen'] != 0:
