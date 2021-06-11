@@ -52,7 +52,7 @@ def network_to_hypergraph(network_graph, routing_matrix, traffic_matrix, perform
                 if G.has_edge(src, dst):
                     D_G.add_node('l_{}_{}'.format(src, dst),
                                  capacity=G.edges[src, dst]['bandwidth'],
-                                 occupancy=P[src][dst]['qosQueuesState'][0]['avgPortOccupancy'] /
+                                 occupancy=P[src][dst]['qosQueuesStats'][0]['avgPortOccupancy'] /
                                             G.nodes[src]['queueSizes'])
 
                 for f_id in range(len(T[src, dst]['Flows'])):
