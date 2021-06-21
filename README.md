@@ -12,7 +12,7 @@ Graph Neural Networks (GNN) have shown a strong potential to be integrated into 
 
 ## Credits
 This project would not have been possible without the contribution of:
-* [Miquel Ferriol-Galmés](https://github.com/BNN-UPC) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* [Miquel Ferriol-Galmés](https://github.com/MiquelFerriol) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * [Jose Suárez-Varela](https://github.com/jsuarezv) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * [David Pujol Perich](https://github.com/dpujol14) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * [Krzysztof Rusek](https://github.com/krzysztofrusek) - Barcelona Neural Networking center, AGH University of Science and Technology
