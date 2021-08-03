@@ -170,14 +170,14 @@ If you also want to modify or even add new hyperparameters, you can do so by mod
 
 ## Credits
 This project would not have been possible without the contribution of:
-* [Miquel Ferriol Galmés](https://github.com/MiquelFerriol) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
-* [Jose Suárez-Varela](https://github.com/jsuarezv) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
-* [David Pujol](https://github.com/dpujol14) -  Barcelona Neural Networking center, Universitat Politècnica de Catalunya
-* [Albert López](https://github.com/albert-lopez) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
-* [Paul Almasan](https://github.com/paulalmasan) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Miquel Ferriol Galmés - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Jose Suárez-Varela - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* David Pujol -  Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Albert López - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Paul Almasan - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * Adrián Manco Sánchez - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * Víctor Sendino Garcia - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
-* [Pere Barlet Ros](https://github.com/pbarlet) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
+* Pere Barlet Ros - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 * Albert Cabellos Aparicio - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 
 ## Mailing List
