@@ -20,21 +20,12 @@ PATHS_PER_SAMPLE = './utils/paths_per_sample_toy_dataset.txt'
 ##########################
 model = ignnition.create_model(model_dir='./')
 model.computational_graph()
-
-# Ensure that directories are loaded in a given order. It is IMPORTANT to keep this, as it ensures that samples
-# are loaded in the desired order
-directories = [d for d in iglob('./sample_data/test/*/*')]
-
-# First, sort by scenario and second, by topology size
-directories.sort(key=lambda f: (os.path.dirname(f), int(os.path.basename(f))))
-
-upload_file = open(FILENAME, "w")
-
 predictions = model.predict()
 # If you need to denormalize or process the model predictions do it here
 # E.g.:
 # predictions = np.exp(predictions)
 
+upload_file = open(FILENAME, "w")
 first = True
 # Separate predictions of each sample; each line contains all the per-path predictions of that sample
 # excluding those paths with no traffic (i.e., flow['AvgBw'] != 0 and flow['PktsGen'] != 0)
