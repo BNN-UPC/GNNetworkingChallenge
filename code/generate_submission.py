@@ -27,7 +27,7 @@ predictions = model.predict()
 # E.g.:
 # predictions = np.exp(predictions)
 
-upload_file = open(FILENAME, "w")
+upload_file = open(FILENAME+'.txt', "w")
 first = True
 # Separate predictions of each sample; each line contains all the per-path predictions of that sample
 # excluding those paths with no traffic (i.e., flow['AvgBw'] != 0 and flow['PktsGen'] != 0)
@@ -48,7 +48,7 @@ sample_num = 0
 error = False
 print("Checking the file...")
 
-with open(FILENAME, "r") as uploaded_file, open(PATHS_PER_SAMPLE, "r") as path_per_sample:
+with open(FILENAME + '.txt', "r") as uploaded_file, open(PATHS_PER_SAMPLE, "r") as path_per_sample:
     # Load all files line by line (not at once)
     for prediction, n_paths in zip_longest(uploaded_file, path_per_sample):
         # Case 1: Line Count does not match.
