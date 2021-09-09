@@ -85,7 +85,7 @@ for d in directories:
         idx += int(x['n_paths'])
         if not first:
             upload_file.write("\n")
-        upload_file.write("{}".format(';'.join([str(i) for i in np.squeeze(top_pred)])))
+        upload_file.write("{}".format(';'.join([format(i,'.6f') for i in np.squeeze(top_pred)])))
         first = False
 
 upload_file.close()
