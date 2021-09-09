@@ -52,12 +52,8 @@ with open(FILENAME + '.txt', "r") as uploaded_file, open(PATHS_PER_SAMPLE, "r") 
     # Load all files line by line (not at once)
     for prediction, n_paths in zip_longest(uploaded_file, path_per_sample):
         # Case 1: Line Count does not match.
-        if n_paths is None:
+        if n_paths is None or prediction is None:
             print("WARNING: File must contain 1560 lines in total for the final test datset (90 for the toy dataset). "
-                  "Looks like the uploaded file has {} lines".format(sample_num))
-            error = True
-        if prediction is None:
-            print("WARNING: File must have 1560 lines in total for the final test datset (90 for the toy dataset). "
                   "Looks like the uploaded file has {} lines".format(sample_num))
             error = True
 
@@ -70,11 +66,12 @@ with open(FILENAME + '.txt', "r") as uploaded_file, open(PATHS_PER_SAMPLE, "r") 
 
         # Case 2: Wrong number of predictions in a sample
         if len(prediction) != int(n_paths):
-            print("WARNING in line {}: The line should have size {} but it has size {}".format(sample_num, n_paths,
-                                                                                               len(prediction)))
+            print("WARNING in line {}: This sample should have {} path delay predictions, "
+                  "but it has {} predictions".format(sample_num, n_paths, len(prediction)))
             error = True
 
         sample_num += 1
 
 if not error:
-    print("Congratulations! The submission file has passed all the tests!")
+    print("Congratulations! The submission file has passed all the tests! "
+          "You can now submit it to the evaluation platform")
