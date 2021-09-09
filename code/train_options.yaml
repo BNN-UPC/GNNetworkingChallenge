@@ -16,9 +16,10 @@
 train_dataset: ../data/train
 validation_dataset: ../data/validation
 predict_dataset: ../data/test
-#warm_start_path:
 additional_functions_file: ./main.py
 output_path: ./
+# Set the path to load a trained model
+# load_model_path: <PATH>
 
 # OPTIMIZATION OPTIONS
 loss: MeanSquaredError
