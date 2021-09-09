@@ -9,12 +9,13 @@ import numpy as np
 from glob import iglob
 import configparser
 from itertools import zip_longest
+import zipfile
 
 from read_dataset import input_fn
 from routenet_model import RouteNetModel
 
 
-FILENAME = 'upload_file.txt'
+FILENAME = 'upload_file'
 
 # Remember to change this path if you want to make predictions on the final
 # test dataset -> './utils/paths_per_sample_test_dataset.txt'
@@ -56,7 +57,7 @@ directories = [d for d in iglob(config['DIRECTORIES']['test'] + '/*/*')]
 # First, sort by scenario and second, by topology size
 directories.sort(key=lambda f: (os.path.dirname(f), int(os.path.basename(f))))
 
-upload_file = open(FILENAME, "w")
+upload_file = open(FILENAME+'.txt', "w")
 
 predictions = []
 first = True
@@ -89,6 +90,7 @@ for d in directories:
 
 upload_file.close()
 
+zipfile.ZipFile(FILENAME+'.zip', mode='w').write(FILENAME+'.txt')
 
 ########################################################
 ###### CHECKING THE FORMAT OF THE SUBMISSION FILE ######
@@ -97,7 +99,7 @@ sample_num = 0
 error = False
 print("Checking the file...")
 
-with open(FILENAME, "r") as uploaded_file, open(PATHS_PER_SAMPLE, "r") as path_per_sample:
+with open(FILENAME+'.txt', "r") as uploaded_file, open(PATHS_PER_SAMPLE, "r") as path_per_sample:
     # Load all files line by line (not at once)
     for prediction, n_paths in zip_longest(uploaded_file, path_per_sample):
         # Case 1: Line Count does not match.
