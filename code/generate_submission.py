@@ -2,6 +2,8 @@ import os
 
 # Uncomment this line in case you want to disable GPU execution
 # Note you need to have CUDA installed to run de execution in GPU
+import zipfile
+
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 import ignnition
@@ -9,7 +11,7 @@ import numpy as np
 from glob import iglob
 from itertools import zip_longest
 
-FILENAME = 'upload_file.txt'
+FILENAME = 'upload_file'
 
 # Remember to change this path if you want to make predictions on the final
 # test dataset -> './utils/paths_per_sample_test_dataset.txt'
@@ -32,10 +34,12 @@ first = True
 for pred in predictions:
     if not first:
         upload_file.write("\n")
-    upload_file.write("{}".format(';'.join([str(i) for i in np.squeeze(pred)])))
+    upload_file.write("{}".format(';'.join([format(i,'.6f') for i in np.squeeze(pred)])))
     first = False
 
 upload_file.close()
+
+zipfile.ZipFile(FILENAME+'.zip', mode='w').write(FILENAME+'.txt')
 
 ########################################################
 ###### CHECKING THE FORMAT OF THE SUBMISSION FILE ######
