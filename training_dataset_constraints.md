@@ -1,0 +1,21 @@
+## Cheatsheet: Constraints for the training dataset
+- The training set can contain a maximum of 100 unique samples (graph topology, routings and traffic matrix tuple). The same graph topology combined with two traffic matrices count as two different samples. 
+- Topology
+    - Up to 10 nodes; no isolated nodes.
+    - All links must be bidirectional.
+    - Nodes Scheduling Policy:
+        - Only 4 policies are allowed:  'FIFO', 'SP', 'WFQ', or 'DRR'.
+        - 'WFQ', or 'DRR' also requires weights. These are formed by three integers that add up to 100.
+    - Node Buffer size must be between 8000 and 64000.
+    - Link bandwith must be between 10000 and 400000 and in multiples of 1000.
+- Traffic matrix
+    - Maximum of one path in between each source, destination pair. Having one path in each direction is allowed.
+    - Average bandwidth must be between 10 and 10000.
+    - Time distributions:
+        - Only 3 policies are allowed (encoded as 0, 1 or 2).
+        - When using an ON-OFF policy (encoded as 2) we must define the on and off periods' length.
+    - The value of pkt_dist should always be 0.
+    - Packet sizes must be between 256 and 2000.
+    - Packet probabilities must be between 0 and 1. Sum of all packet probabilities must equal 1.
+    - ToS must be either 0, 1 or 2.
+- You can find any other rules about participating in the Challenge at https://bnn.upc.edu/challenge/gnnet2022/#rules
