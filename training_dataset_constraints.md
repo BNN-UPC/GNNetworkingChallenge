@@ -6,7 +6,7 @@
     - Nodes Scheduling Policy:
         - Only 4 policies are allowed:  'FIFO', 'SP', 'WFQ', or 'DRR'.
         - 'WFQ', or 'DRR' also requires weights. These are formed by three integers that add up to 100.
-    - Node Buffer size must be between 8000 and 64000.
+    - Node Buffer size must be between 8000 and 64000 bits.
     - Link bandwith must be between 10000 and 400000 and in multiples of 1000.
 - Traffic matrix
     - Maximum of one path in between each source, destination pair. Having one path in each direction is allowed.
@@ -15,7 +15,7 @@
         - Only 3 policies are allowed (encoded as 0, 1 or 2).
         - When using an ON-OFF policy (encoded as 2) we must define the on and off periods' length.
     - The value of pkt_dist should always be 0.
-    - Packet sizes must be between 256 and 2000.
-    - Packet probabilities must be between 0 and 1. Sum of all packet probabilities must equal 1.
-    - ToS must be either 0, 1 or 2.
+    - Packet sizes must be between 256 and 2000 bits.
+    - Packet size probabilities must be between 0 and 1. Sum of all packet probabilities must equal 1.
+    - Type of Service (ToS) must be either 0, 1 or 2.
 - You can find any other rules about participating in the Challenge at https://bnn.upc.edu/challenge/gnnet2022/#rules
