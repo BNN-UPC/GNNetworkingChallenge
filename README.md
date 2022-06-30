@@ -1,6 +1,10 @@
 # Graph Neural Networking Challenge
+**UPDATE: The [Graph Neural Networking challenge 2022: Improving Network Digital Twins through Data-centric AI](https://bnn.upc.edu/challenge/gnnet2022/) is now open! Find you can download the repository and start the challenge [here!](https://github.com/BNN-UPC/GNNetworkingChallenge/tree/2022_DataCentricAI)**
+
 #### Organized as part of "ITU AI/ML in 5G challenge"
 Graph Neural Networks (GNN) have shown a strong potential to be integrated into commercial products for network control and management. Early works using GNN have demonstrated an unprecedented capability to learn from different network characteristics that are fundamentally represented as graphs, such as the topology, the routing configuration, or the traffic that flows along a series of nodes in the network. In contrast to previous ML-based solutions, GNN enables to produce accurate predictions even in networks unseen during the training phase. Nowadays, GNN is a hot topic in the Machine Learning field and, as such, we are witnessing great efforts to leverage its potential in many different fields (e.g., chemistry, physics, social networks). The Graph Neural Networking challenge is an annual competition that brings fundamental challenges on the application of GNN to networking applications. Check out all the editions:
+* [Graph Neural Networking challenge 2022: Improving Network Digital Twins through Data-centric AI](https://bnn.upc.edu/challenge/gnnet2022/)
+    * [GNN Model and notebooks](https://github.com/BNN-UPC/GNNetworkingChallenge/tree/2022_DataCentricAI)
 * [Graph Neural Networking challenge 2021: Creating a Scalable Network Digital Twin](https://bnn.upc.edu/challenge/gnnet2021/)
     * [iGNNition Baseline](https://github.com/BNN-UPC/GNNetworkingChallenge/tree/2021_Routenet_iGNNition)
     * [Tensorflow Baseline](https://github.com/BNN-UPC/GNNetworkingChallenge/tree/2021_Routenet_TF)
@@ -24,7 +28,7 @@ This project would not have been possible without the contribution of:
 * Albert Cabellos Aparicio - Barcelona Neural Networking center, Universitat Politècnica de Catalunya
 
 ## Mailing List
-If you have any doubts, or want to discuss anything related to this repository, you can send an email to the mailing list [challenge2021@bnn.upc.edu]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)). Please, note that you need to subscribe to the mailing list before sending an email [[link]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2021)].
+If you have any doubts, or want to discuss anything related to this repository, you can send an email to the mailing list [challenge2022@bnn.upc.edu]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2022)). Please, note that you need to subscribe to the mailing list before sending an email [[link]( https://mail.bnn.upc.edu/cgi-bin/mailman/listinfo/challenge2022)].
 
 ## License
 See [LICENSE](LICENSE) for full of the license text.
