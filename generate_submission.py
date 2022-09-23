@@ -228,7 +228,7 @@ def validate_dataset(dataset_path):
         print("==> Invalid dataset. The dataset contains more than 100 samples")
         return (1)
     else:
-        print("==> Dataset validated. Number of samples: {}".format(num_samples))
+        print("==> Number of samples: {}".format(num_samples))
         return (0)
 
 #################################################################
