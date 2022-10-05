@@ -802,16 +802,16 @@ class DatanetAPI:
                 it = 0 
                 tar = tarfile.open(os.path.join(root, file), 'r:gz')
                 dir_info = tar.next()
-                results_file = tar.extractfile(dir_info.name+"/simulationResults.txt")
-                traffic_file = tar.extractfile(dir_info.name+"/traffic.txt")
-                status_file = tar.extractfile(dir_info.name+"/stability.txt")
-                input_files = tar.extractfile(dir_info.name+"/input_files.txt")
-                if (dir_info.name+"/flowSimulationResults.txt" in tar.getnames()):
-                    flowresults_file = tar.extractfile(dir_info.name+"/flowSimulationResults.txt")
+                results_file = tar.extractfile(os.path.join(dir_info.name,"simulationResults.txt"))
+                traffic_file = tar.extractfile(os.path.join(dir_info.name,"traffic.txt"))
+                status_file = tar.extractfile(os.path.join(dir_info.name,"stability.txt"))
+                input_files = tar.extractfile(os.path.join(dir_info.name,"input_files.txt"))
+                if (os.path.join(dir_info.name,"flowSimulationResults.txt") in tar.getnames()):
+                    flowresults_file = tar.extractfile(os.path.join(dir_info.name,"flowSimulationResults.txt"))
                 else:
                     flowresults_file = None
-                if (dir_info.name+"/linkUsage.txt" in tar.getnames()):
-                    link_usage_file = tar.extractfile(dir_info.name+"/linkUsage.txt")
+                if (os.path.join(dir_info.name,"linkUsage.txt") in tar.getnames()):
+                    link_usage_file = tar.extractfile(os.path.join(dir_info.name,"linkUsage.txt"))
                 else:
                     link_usage_file = None
                 while(True):
