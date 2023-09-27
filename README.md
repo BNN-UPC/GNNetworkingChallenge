@@ -133,11 +133,11 @@ python predict.py -ds (CBR+MB|MB) --ckpt-path path/to/checkpoint --tr-path "path
 
 The script will generate a zip file containing a csv file with the mean delay prediction for each flow of every sample within the specified dataset. **This zip file is the submission that you must upload to the platform.** If you look to inside the csv file within the submission, it should look something like this
 ```
-3150;0_1_0;0.06730932742357254
-3150;0_1_1;0.06730929762125015
-3150;0_2_0;0.12553007900714874
-3150;0_2_1;0.12553006410598755
-3150;0_3_0;0.09878162294626236
+3150;0_1_0;0.067309
+3150;0_1_1;0.067309
+3150;0_2_0;0.125530
+3150;0_2_1;0.125530
+3150;0_3_0;0.098781
 ...
 ```
 
