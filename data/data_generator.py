@@ -34,6 +34,13 @@ parser.add_argument("--output-dir", type=str, required=True)
 parser.add_argument("--shuffle", action="store_true")
 parser.add_argument("--seed", type=int, default=42)
 parser.add_argument("--n-folds", type=int, default=5)
+parser.add_argument(
+    "--test",
+    action="store_true",
+    help="If true, assume that the dataset is a test dataset. If so, n-folds will be "
+    + "equal to 1, there will no shuffling, and the dataset will not check for "
+    + "unvalid delays.",
+)
 args = parser.parse_args()
 
 # import datasets's DataNet API
@@ -210,7 +217,7 @@ def _get_network_decomposition(sample: Sample) -> Tuple[dict, list]:
 
 
 def _generator(
-    data_dir: str, shuffle: bool
+    data_dir: str, shuffle: bool, verify_delays: bool
 ) -> Generator[Tuple[Dict[str, Any], List[float]], None, None]:
     """Returns processed samples from the given dataset.
 
@@ -220,6 +227,8 @@ def _generator(
         Path to the dataset
     shuffle : bool
         True to shuffle the samples, False otherwise
+    verify_delays: bool, optional
+        True so that samples with unvalid delay values are discarded
 
     Yields
     ------
@@ -235,12 +244,12 @@ def _generator(
     for sample in iter(tool):
         ret = _get_network_decomposition(sample)
         # SKIP SAMPLES WITH ZERO OR NEGATIVE VALUES
-        if not all(x > 0 for x in ret[1]):
+        if verify_delays and not all(x > 0 for x in ret[1]):
             continue
         yield ret
 
 
-def input_fn(data_dir: str, shuffle: bool = False) -> tf.data.Dataset:
+def input_fn(data_dir: str, shuffle: bool = False, verify_delays:bool = True) -> tf.data.Dataset:
     """Returns a tf.data.Dataset object with the dataset stored in the given path
 
     Parameters
@@ -249,6 +258,8 @@ def input_fn(data_dir: str, shuffle: bool = False) -> tf.data.Dataset:
         Path to the dataset
     shuffle : bool, optional
         True to shuffle the samples, False otherwise, by default False
+    verify_delays: bool, optional
+        True so that samples with unvalid delay values are discarded, by default True
 
     Returns
     -------
@@ -276,7 +287,7 @@ def input_fn(data_dir: str, shuffle: bool = False) -> tf.data.Dataset:
 
     ds = tf.data.Dataset.from_generator(
         _generator,
-        args=[data_dir, shuffle],
+        args=[data_dir, shuffle, verify_delays],
         output_signature=signature,
     )
 
@@ -296,32 +307,36 @@ tf.random.set_seed(args.seed)
 tf.data.Dataset.save(
     input_fn(
         args.input_dir,
-        shuffle=args.shuffle,
+        shuffle=args.shuffle and not args.test,
+        verify_delays=not args.test,
     ),
     args.output_dir,
     compression="GZIP",
 )
 
-# Split dataset into 5 folds
-# NOTE: the reason why we store the dataset and load it again is because otherwise
-# tensorflow will try regenerate the dataset using the generator for each fold
-# which results in taking a lot of time
-ds = tf.data.Dataset.load(args.output_dir, compression="GZIP")
-ds_split = [ds.shard(args.n_folds, ii) for ii in range(args.n_folds)]
-dataset_name = args.output_dir if args.output_dir[-1] != "/" else args.output_dir[:-1]
-
-for ii in range(args.n_folds):
-    # Split dataset into train and validation
-    tr_splits = [jj for jj in range(args.n_folds) if jj != ii]
-    ds_val = ds_split[ii]
-    ds_train = ds_split[tr_splits[0]]
-    for jj in tr_splits[1:]:
-        ds_train = ds_train.concatenate(ds_split[jj])
-
-    # Save datasets
-    tf.data.Dataset.save(
-        ds_train, f"{dataset_name}_cv/{ii}/training", compression="GZIP"
+if not args.test and args.n_folds > 1:
+    # Split dataset into n folds
+    # NOTE: the reason why we store the dataset and load it again is because otherwise
+    # tensorflow will try regenerate the dataset using the generator for each fold
+    # which results in taking a lot of time
+    ds = tf.data.Dataset.load(args.output_dir, compression="GZIP")
+    ds_split = [ds.shard(args.n_folds, ii) for ii in range(args.n_folds)]
+    dataset_name = (
+        args.output_dir if args.output_dir[-1] != "/" else args.output_dir[:-1]
     )
-    tf.data.Dataset.save(
-        ds_val, f"{dataset_name}_cv/{ii}/validation", compression="GZIP"
-    )
+
+    for ii in range(args.n_folds):
+        # Split dataset into train and validation
+        tr_splits = [jj for jj in range(args.n_folds) if jj != ii]
+        ds_val = ds_split[ii]
+        ds_train = ds_split[tr_splits[0]]
+        for jj in tr_splits[1:]:
+            ds_train = ds_train.concatenate(ds_split[jj])
+
+        # Save datasets
+        tf.data.Dataset.save(
+            ds_train, f"{dataset_name}_cv/{ii}/training", compression="GZIP"
+        )
+        tf.data.Dataset.save(
+            ds_val, f"{dataset_name}_cv/{ii}/validation", compression="GZIP"
+        )

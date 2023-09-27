@@ -1,4 +1,6 @@
-# Graph Neural Networking Challenge 2023: Creating a Network Digital Twin with Real Network Data
+# Graph Neural Networking Challenge 2023
+
+**Update September 27th: predict.py script uploaded. Now you can make a submission for the toy dataset to ensure you can generate correctly formatted submissions.**
 
 For more information about this challenge go to: https://bnn.upc.edu/challenge/gnnet2023
 
@@ -7,13 +9,15 @@ For more information about the ITU AI/ML in 5G Challenge go to: https://aiforgoo
 Remember that the full datasets must be downloaded separately at: https://bnn.upc.edu/challenge/gnnet2023/dataset
 
 
-- [Graph Neural Networking Challenge 2023: Creating a Network Digital Twin with Real Network Data](#graph-neural-networking-challenge-2023-creating-a-network-digital-twin-with-real-network-data)
+- [Graph Neural Networking Challenge 2023](#graph-neural-networking-challenge-2023)
   - [Repository structure](#repository-structure)
   - [Quickstart](#quickstart)
     - [Python environment](#python-environment)
     - [Downloading the dataset and preprocessing the dataset](#downloading-the-dataset-and-preprocessing-the-dataset)
     - [(Alternative) work with the provided pre-processed datasets](#alternative-work-with-the-provided-pre-processed-datasets)
     - [Training and evaluating the model](#training-and-evaluating-the-model)
+    - [Making predictions](#making-predictions)
+    - [IMPORTANT: How to check you are able to generate correct predictions](#important-how-to-check-you-are-able-to-generate-correct-predictions)
   - ["How-to" guide for modifying the code](#how-to-guide-for-modifying-the-code)
     - [Default features](#default-features)
     - [Extracting new features](#extracting-new-features)
@@ -31,8 +35,10 @@ Remember that the full datasets must be downloaded separately at: https://bnn.up
 ## Repository structure
 
 - data: folder containing the code needed to proceprocess the samples. It also includes versions of the datasets with the baseline's procecessing already applied.
+- verification_files: folder containing files used by the predict.py script to verify the generated submissions
 - [models.py](models.py): python module which contain the two baseline models, one for each dataset
 - [train.py](train.py): python script that can be used to train the baseline projects
+- [predict.py](predict.py): python script used to generate predictions for the test dataset and challenge submissions. 
 
 ## Quickstart
 
@@ -48,10 +54,10 @@ To work with the baseline models, [tensorflow](https://www.tensorflow.org/) 2.11
 
 We recommend setting up a clean python virtual environment for this project (e.g. virtualenv or conda). You can install all the required packages with the following pip commands (the latter only to install tensorflow):
 
-```
+```bash
 pip install networkx==3.0 numpy==1.24.2
 ```
-```
+```bash
 pip install tensorflow==2.11.1
 ```
 
@@ -66,7 +72,7 @@ Visit the following link to download the dataset and see the instructions on how
 
 Once you download the datasets, you may apply the default pre-processing by running the [data_generator.py](data/data_generator.py) script:
 
-```
+```bash
 python data/data_generator.py --input-dir "/path/to/cbr+mb/dataset" --output-dir data/data_cbr_mb
 
 python data/data_generator.py --input-dir "/path/to/mb/dataset" --output-dir data/data_mb
@@ -89,9 +95,10 @@ Note that these datasets are much smaller (~ 100 MBs total), but you will not be
 We have included all the code to train and evaluate the baseline models in the following python files:
 - [models.py](models.py): Contains the two baseline model architectures (one meant for each dataset)
 - [train.py](train.py): Script to train and evaluate models
+- [predict.py](predict.py): Script to generate submissions
 
 By using the [train.py](train.py) script, we can train the models with the different datasets. By default, the following calls are supported:
-```
+```bash
 # Train the baseline model using the CBR+MB dataset
 python train.py -ds CBR+MB
 
@@ -108,9 +115,54 @@ python train.py -ds MB -cfv
 When running by default, the checkpoints with the weights will be stored at the *ckpt/* directory, and the tensorboard logs at the *tensorboard/* directory.
 
 In order to have more control when training the models, you can import the `train_and_evaluate` function and adjust its argument.
-```
+```python
 from train import train_and_evaluate
 ```
+
+### Making predictions
+
+Once the model has been trained, you can evaluate it using the [predict.py](predict.py) script:
+```bash
+python predict.py -ds (CBR+MB|MB) --ckpt-path path/to/checkpoint --tr-path "path/to/training/dataset" --te-path "path/to/test/dataset" [--toy]
+```
+- The dataset must be specified so that the script loads the correct model architecture.
+- The checkpoint path is used to load the specific model weights.
+- The training dataset must be specified so that the script can extract the min-max normalization values from it.
+- The test dataset is the dataset to predict the values from.
+- The toy flag will indicate the script to expect the toy dataset rather than the test dataset. This is required by the script to correctly verify the generated submission is valid.
+
+The script will generate a zip file containing a csv file with the mean delay prediction for each flow of every sample within the specified dataset. **This zip file is the submission that you must upload to the platform.** If you look to inside the csv file within the submission, it should look something like this
+```
+3150;0_1_0;0.06730932742357254
+3150;0_1_1;0.06730929762125015
+3150;0_2_0;0.12553007900714874
+3150;0_2_1;0.12553006410598755
+3150;0_3_0;0.09878162294626236
+...
+```
+
+
+If you prefer, rather than running the predict.py script directly, you can import its `predict` function so that it can be called from your own code. **It is key that whatever you do you do not modify how the output of the prediction is produced. Otherwise we will not be able to correctly asses your submission.**
+```python
+from predict import predict
+```
+
+### IMPORTANT: How to check you are able to generate correct predictions
+
+To ensure the participants are able to generate valid submissions, we have published a toy dataset that can be used to generate a sample submission. The steps to do so are the following:
+
+1. Download the toy dataset from the following link: https://bnn.upc.edu/download/ch23-toy-dataset/
+2. Parse the dataset using the data generator. Remember to use the "--test" flag, as the toy dataset has no labels:
+```bash
+cd data
+python data_generator.py --input-dir "path/to/toy/dataset" --output-dir data_toy --test
+```
+3. Use the [predict.py](predict.py) to make the toy submission. Remember to add the "--toy" flag so the correct verification files are loaded:
+```bash
+cd ..
+python predict.py -ds (CBR+MB|MB) --ckpt-path path/to/checkpoint --tr-path "path/to/training/dataset" --te-path "data/data_toy --toy
+```
+4. If a submission .zip file was generated, it means the submission was correctly generated!
 
 ## "How-to" guide for modifying the code
 
@@ -408,7 +460,7 @@ self.readout_path = tf.keras.Sequential(
 #### **Changing how and which features are normalized**
 
 Currently, min-max normalization is implemented in the model as follows: when a model is instantiated, the min-max normalization values are computed and passed to the model in the following line:
-```
+```python
 model.set_min_max_scores(get_min_max_dict(ds_train, model.min_max_scores_fields))
 ```
 - `model.min_max_scores_fields` is a set that indicates the name of the fields that need min-max normalization
