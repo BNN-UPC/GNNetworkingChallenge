@@ -28,6 +28,7 @@ Remember that the full datasets must be downloaded separately at: https://bnn.up
       - [**Modify the internal MLPs and RNNs of the model**](#modify-the-internal-mlps-and-rnns-of-the-model)
       - [**Changing how and which features are normalized**](#changing-how-and-which-features-are-normalized)
       - [**Changing the training process hyperparameters**](#changing-the-training-process-hyperparameters)
+  - [Format of the submission file:](#format-of-the-submission-file)
   - [Credits](#credits)
   - [Mailing list](#mailing-list)
 
@@ -133,11 +134,11 @@ python predict.py -ds (CBR+MB|MB) --ckpt-path path/to/checkpoint --tr-path "path
 
 The script will generate a zip file containing a csv file with the mean delay prediction for each flow of every sample within the specified dataset. **This zip file is the submission that you must upload to the platform.** If you look to inside the csv file within the submission, it should look something like this
 ```
-3150;0_1_0;0.067309
-3150;0_1_1;0.067309
-3150;0_2_0;0.125530
-3150;0_2_1;0.125530
-3150;0_3_0;0.098781
+3150;0_1_0;0.06730932742357254
+3150;0_1_1;0.06730929762125015
+3150;0_2_0;0.12553007900714874
+3150;0_2_1;0.12553006410598755
+3150;0_3_0;0.09878162294626236
 ...
 ```
 
@@ -512,6 +513,31 @@ trained_model, evaluation = train_and_evaluate(
 *NOTE:* while you are free to choose the loss function you believe it is best, your solution will be evaluated using the MAPE.
 
 If there is another aspect of the pipeline that you wish to change, but it is not covered by the method's attribute, you are encouraged to make any changes to the [train.py](train.py) you wish.
+
+## Format of the submission file:
+
+If you are not sure if the output of your solution fits correctly the format of the output CSV file, we detail below the format this file should have: 
+- Each line should contain 3 values separated by “;”, representing the prediction for a single flow:
+    - The sample’s id value, represented as an integer.
+    - A 3-value tuple to identify the flow within the sample, indicating the source, the destination, and the flow id. This is represented by a string formed by three integers joined with underscore characters (e.g. “0_1_2”)
+    - The predicted delay, as a float value. Note: delay prediction MUST contain a maximum of 9 decimal digits. Further digits will be truncated.
+- **The predicted delays are expected to be unnormalized.** If your model produces normalized and/or transformed values, make sure to undo these changes before storing them in the submission. **The predicted delays should be measured in seconds.**
+- **The order of the samples (i.e., the lines in the CSV document) is important.** To ensure they are correctly ordered, when you read the test dataset with the DataNet API we provide, ensure that the option “shuffle” has a value of “False”.
+
+For example, a correctly format document would start as follows:
+
+```
+0;0_1_0;0.000137105
+0;0_1_1;0.000137105
+0;0_2_0;0.000082274
+0;0_2_1;0.000082274
+0;0_3_0;0.000101136
+...
+```
+
+The submission is verified with the verification file “verification_files/submission_verification.txt” (or “verification_files/submission_verification_toy.txt” for the toy dataset). This document indicates the number of flows per sample (and hence, for the entire dataset). By default, the script uses them to verify the submission.
+
+
 ## Credits
 This project would not have been possible without the contribution of:
 * [Carlos Güemes Palau](https://github.com/CarlosGuemS) - Barcelona Neural Networking center, Universitat Politècnica de Catalunya

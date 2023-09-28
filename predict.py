@@ -18,22 +18,49 @@ import sys
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import tensorflow as tf
-from typing import Optional
+from typing import Optional, Tuple, Callable
 import pandas as pd
+import numpy as np
 
 
 def print_err(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
+def _default_individual_prediction(model: tf.keras.Model, sample: any) -> np.ndarray:
+    """
+    Default function to predict the flow delay values for a given sample. The prediction
+    is returned as a flat, unnormalized numpy array and in seconds.
+
+    Parameters
+    ----------
+    model : tf.keras.Model
+        The model to use for prediction. Its weights should be already trained.
+    sample_features : any
+        The sample to predict. By default it expects samples from a tf.data.Dataset,
+        but can be any format that allows to iterate over it.
+
+
+    Returns
+    -------
+    np.ndarray
+        The predictions to return.
+    """
+    # Obtain the prediction as numpy array, and flatten
+    pred = model(sample).numpy().reshape((-1,))
+    # Transform the prediction from ms to s, and return
+    return  pred / 1000
+
+
 def predict(
-    ds_path: any,
+    ds: any,
     model: tf.keras.Model,
     predict_file_name: str,
     submission_verification_file_path: Optional[
         str
     ] = "verification_files/submission_verification.txt",
     predict_file_path: Optional[str] = None,
+    individual_prediction: Callable[[any, any], np.ndarray] = _default_individual_prediction,
     verbose: bool = False,
 ) -> None:
     """Use the given model to predict flow delay values for the given dataset.
@@ -86,7 +113,7 @@ def predict(
         list_flow_id += flow_id
         num_flow_id.append(len(flow_id))
 
-        predicted_delay = model(sample_features).numpy().reshape((-1,)).tolist()
+        predicted_delay = individual_prediction(model, sample_features).tolist()
         list_predicted_delay += predicted_delay
         num_predicted_delay.append(len(predicted_delay))
     if verbose:
@@ -163,7 +190,7 @@ def predict(
         index=False,
         sep=";",
         header=False,
-        float_format='%.6f',
+        float_format="%.9f",
         compression={"method": "zip", "archive_name": f"{predict_file_name}.csv"},
     )
 
@@ -230,7 +257,7 @@ if __name__ == "__main__":
         if args.toy
         else "verification_files/submission_verification.txt"
     )
-    
+
     # Load the test dataset
     ds = tf.data.Dataset.load(args.te_path, compression="GZIP")
 
