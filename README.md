@@ -14,6 +14,7 @@ Remember that the full datasets must be downloaded separately at: https://bnn.up
   - [Quickstart](#quickstart)
     - [Python environment](#python-environment)
     - [Downloading the dataset and preprocessing the dataset](#downloading-the-dataset-and-preprocessing-the-dataset)
+      - [IMPORTANT: PROCESSING THE TEST DATASET](#important-processing-the-test-dataset)
     - [(Alternative) work with the provided pre-processed datasets](#alternative-work-with-the-provided-pre-processed-datasets)
     - [Training and evaluating the model](#training-and-evaluating-the-model)
     - [Making predictions](#making-predictions)
@@ -79,6 +80,14 @@ python data/data_generator.py --input-dir "/path/to/cbr+mb/dataset" --output-dir
 python data/data_generator.py --input-dir "/path/to/mb/dataset" --output-dir data/data_mb
 ```
 
+#### IMPORTANT: PROCESSING THE TEST DATASET
+
+Once you downloaded the test dataset from https://bnn.upc.edu/challenge/gnnet2023/dataset you will also need to preprocess it! When doing so with [data_generator.py](data/data_generator.py), you have to add the "--test" flag so that the generator does expect invalid flow delays:
+
+```bash
+python data/data_generator.py --input-dir "/path/to/test/dataset" --output-dir data/data_test --test
+```
+
 ### (Alternative) work with the provided pre-processed datasets
 
 Alternatively, you can work with the preprocessed datasets we have already provided within this repository.
@@ -124,7 +133,7 @@ from train import train_and_evaluate
 
 Once the model has been trained, you can evaluate it using the [predict.py](predict.py) script:
 ```bash
-python predict.py -ds (CBR+MB|MB) --ckpt-path path/to/checkpoint --tr-path "path/to/training/dataset" --te-path "path/to/test/dataset" [--toy]
+python predict.py -ds (CBR+MB|MB) --ckpt-path "path/to/checkpoint" --tr-path "path/to/training/dataset" --te-path "path/to/test/dataset" [--toy]
 ```
 - The dataset must be specified so that the script loads the correct model architecture.
 - The checkpoint path is used to load the specific model weights.
