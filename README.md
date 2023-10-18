@@ -1,6 +1,7 @@
 # Graph Neural Networking Challenge 2023
 
-**Update September 27th: predict.py script uploaded. Now you can make a submission for the toy dataset to ensure you can generate correctly formatted submissions.**
+~~**Update September 27th: predict.py script uploaded. Now you can make a submission for the toy dataset to ensure you can generate correctly formatted submissions.**~~
+**Update October 18th: submission period ended. Thank you for participating on the Graph Neural Networking Challenge 2023! The pdf explaining our proposed solution has been uploaded to this repository (publication in arxiv pending).**
 
 For more information about this challenge go to: https://bnn.upc.edu/challenge/gnnet2023
 
